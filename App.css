@@ -1,0 +1,191 @@
+html, body, #root {
+  height: 100vh;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100vh;
+  align-content: center;
+  font-family: sans-serif;
+  margin:0;
+  margin-top: 2%;
+  background: -webkit-gradient(linear, left top, right bottom, from(#ffeb3b), to(#304ffe)) fixed;
+}
+
+
+table{
+  margin: auto;
+}
+.container {
+  width: 500px;
+  height: 500px;
+  border-radius: 2em;
+  background-color: rgba(255, 255, 255, 0.534);
+  overflow: hidden;
+  align-self: center;
+}
+
+.panelSelect {
+  display: flex;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.panelSelect > div {
+  width: 50%;
+  padding: 0.5em 0;
+  cursor: default;
+}
+
+.panelSelect > div:not(.selected):hover {
+  cursor: pointer;
+  background-color:rgba(255, 255, 255, 0.534);
+}
+
+.panelSelect > div.selected {
+  background-color: #fff;
+}
+
+label, input, button {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 1em;
+  padding: 0 1em;
+}
+
+label {
+  padding: 0 0.5em;
+  margin-bottom: 0.5em;
+}
+
+input, button {
+  width: 20em;
+  height: 3em;
+  border-radius: 1em;
+  border: 2px solid #ccc;
+}
+
+button {
+  color: #fff;
+  font-weight: bold;
+  background-color: #04f;
+  border: 2px solid #ccc;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #04f;
+}
+
+button:focus, button:hover {
+  outline: none;
+  text-decoration: underline;
+}
+
+.form {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#password.low, #confirmPassword.low {
+  background-color: #f44336;
+}
+
+#password.medium {
+  background-color: #ffeb3b;
+}
+
+#password.high, #confirmPassword.high {
+  background-color: #4caf50;
+}
+#g_rable{
+  padding-top: 5%;
+}
+
+#table{
+  font-size: 12px;
+  border-width: medium;
+  border-color: blue;
+  border-style: none;
+}
+td{
+  text-align: center;
+}
+@media only screen and (max-device-width: 734px)  {
+  
+   /* section{
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0%;
+  } */
+
+  #g_rable{
+    padding-top: 13%;
+  }
+
+  #table{
+    font-size: 15px;
+    font: bold;
+    border-color: blue;
+  }
+  td{
+    border-style: none;
+    text-align: center;
+  }
+
+}
+
+@media only screen  and (max-device-width: 1138px) and (min-device-width: 734px) and (max-device-height: 500px){
+  #g_rable{
+    padding-top: 15%;
+  }
+
+  #table{
+    font-size: 20px;
+    font: bold;
+    border-color: blue;
+  }
+  td{
+    border-style: none;
+    text-align: center;
+  }
+}
+
+/* планшет в портретном режиме */
+@media only screen  and (max-device-width: 1138px) and (min-device-width: 734px) and (min-device-height: 734px){
+  #g_rable{
+    padding-top: 8%;
+  }
+
+  .container{
+    width: 800px;
+    height: 800px;
+  }
+
+  #graph{
+    margin: auto;
+    position: relative;
+    left: 10%;
+    bottom: 0;
+  }
+ 
+  *{
+    font-size: 22px;
+  }
+  input, button {
+    width: 30em;
+    height: 5em;
+    border-radius: 1em;
+    border: 2px solid #ccc;
+  }
+}
