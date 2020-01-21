@@ -19,25 +19,25 @@ class Signin extends React.Component {
         };
 
 
-        const cookies = new Cookies();
-        let token = cookies.get('token');
-        if (token != undefined) {
-            var self = this;
-            $.ajax({
-                type: 'POST',
-                url: 'http://' + Constants.HOST + '/api/checkToken',
-                data: { token: token },
-                success: function (jqXHR, textStatus, errorThrown) {
-                    if (jqXHR.response !== "false") {
-                        window.location.href = './main';
-                    } else self.setState({ loading: false });
-                }
-            });
+        // const cookies = new Cookies();
+        // let token = cookies.get('token');
+        // if (token != undefined) {
+        //     var self = this;
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: 'http://' + Constants.HOST + '/api/checkToken',
+        //         data: { token: token },
+        //         success: function (jqXHR, textStatus, errorThrown) {
+        //             if (jqXHR.response !== "false") {
+        //                 window.location.href = './main';
+        //             } else self.setState({ loading: false });
+        //         }
+        //     });
 
 
-        } else {
-            this.setState({ loading: false });
-        }
+        // } else {
+        //     this.setState({ loading: false });
+        // }
         this.createClickHandler = this.createClickHandler.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -62,7 +62,7 @@ class Signin extends React.Component {
         else {
             $.ajax({
                 type: 'POST',
-                url: 'http://' + Constants.HOST + '/api/login',
+                url: Constants.HOST+'/api/login',
                 data: { emailuser: email, passworduser: password },
                 success: function (jqXHR, textStatus, errorThrown) {
                     const cookies = new Cookies();
@@ -74,7 +74,7 @@ class Signin extends React.Component {
                         hideProgressBar: true
                     });
                     setTimeout(function () {
-                        window.location.href = './main';
+                        window.location.href = './';
                     }, 1500);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

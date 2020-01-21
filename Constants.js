@@ -1,6 +1,6 @@
 class Constants {
     static get HOST() {
-      return 'localhost:20900';
+      return '';
     }
 }
 export default Constants;

@@ -17,7 +17,7 @@ class MainPage extends React.Component {
       var self = this;
       $.ajax({
         type: 'POST',
-        url: 'http://' + Constants.HOST + '/api/checkToken',
+        url: Constants.HOST+'/api/checkToken',
         data: { token: token },
         success: function (jqXHR, textStatus, errorThrown) {
           if (jqXHR.response === "false") {

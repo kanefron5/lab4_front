@@ -62,7 +62,7 @@ class Create extends React.Component {
         if (password === confirmPassword) {
             $.ajax({
                 type: 'POST',
-                url: 'http://' + Constants.HOST + '/api/registration',
+                url: Constants.HOST+'/api/registration',
                 data: { emailuser: email, passworduser: password },
                 success: function (jqXHR, textStatus, errorThrown) {
                     toast.success(jqXHR.response, {

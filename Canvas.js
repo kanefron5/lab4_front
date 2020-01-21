@@ -28,6 +28,36 @@ class Canvas extends React.Component {
 
     handleChange(event) {
         const { name, value } = event.target;
+        if(name==='r'){
+            var check_r = checkVar(value, 'R', 0, 5);
+            document.getElementById('error_r').innerText = check_r[0];
+            if (check_r[1]) {
+                drawView(value);
+                const cookies = new Cookies();
+                let token = cookies.get('token');
+                $.ajax({
+                    type: 'GET',
+                    url: Constants.HOST+'/api/getDots',
+                    data: { token: token},
+                    success: function (jqXHR, textStatus, errorThrown) {
+                        setTableData(jqXHR);
+                        for (let index = 0; index < jqXHR.length; index++) {
+                            const point = jqXHR[index];
+                            const graph = document.getElementById('graph');
+                            const context = graph.getContext('2d');
+
+                            drawPoint(+(value.replace(",", ".")), context, { x: point.x, y: point.y, r: +(value.replace(",", ".")), popadanie: point.popadanie });
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                    },
+                });
+            }else{
+                drawView(null);
+            }
+        }
         this.setState({
             [name]: value
         });
@@ -45,15 +75,13 @@ class Canvas extends React.Component {
         document.getElementById('error_r').innerText = check_r[0];
 
         if (check_r[1]) {
+            const cookies = new Cookies();
+            let token = cookies.get('token');
             drawView(r);
             if (check_x[1] && check_y[1]) {
-                let self = this;
-                const cookies = new Cookies();
-                let token = cookies.get('token');
-
                 $.ajax({
                     type: 'POST',
-                    url: 'http://' + Constants.HOST + '/api/sendDot',
+                    url: Constants.HOST+'/api/sendDot',
                     data: { token: token, x: x, y: y, r: r },
                     success: function (jqXHR, textStatus, errorThrown) {
                         setTableData(jqXHR);
@@ -71,6 +99,26 @@ class Canvas extends React.Component {
                     },
                 });
 
+            }else{
+                $.ajax({
+                    type: 'GET',
+                    url: Constants.HOST+'/api/getDots',
+                    data: { token: token},
+                    success: function (jqXHR, textStatus, errorThrown) {
+                        setTableData(jqXHR);
+                        for (let index = 0; index < jqXHR.length; index++) {
+                            const point = jqXHR[index];
+                            const graph = document.getElementById('graph');
+                            const context = graph.getContext('2d');
+
+                            drawPoint(+(r.replace(",", ".")), context, { x: point.x, y: point.y, r: +(r.replace(",", ".")), popadanie: point.popadanie });
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                    },
+                });
             }
         }
 
@@ -294,7 +342,7 @@ function drawView(r) {
 
             $.ajax({
                 type: 'POST',
-                url: 'http://' + Constants.HOST + '/api/sendDot',
+                url: Constants.HOST+'/api/sendDot',
                 data: { token: token, x: (visualX - centerX) / zoomX, y: (centerY - visualY) / zoomY, r: +(r.replace(",", ".")) },
                 success: function (jqXHR, textStatus, errorThrown) {
                     setTableData(jqXHR);
